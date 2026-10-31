@@ -1,3 +1,6 @@
+
+
+
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -206,17 +209,11 @@ export default function InsightPanel({ chart, selectedPalace, selectedSiHua }: I
   }, [messages]);
 
   // Auto-generate 命格总览 on mount
- useEffect(() => {
-  if (autoLoaded.current) return;
-
-  autoLoaded.current = true;
-
-  const timer = setTimeout(() => {
+  useEffect(() => {
+    if (autoLoaded.current) return;
+    autoLoaded.current = true;
     sendMessage(TOPIC_PROMPTS.overview, true);
-  }, 300);
-
-  return () => clearTimeout(timer);
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Inject palace analysis when palace selected
   useEffect(() => {
