@@ -206,8 +206,7 @@ export default function InsightPanel({ chart, selectedPalace, selectedSiHua }: I
   }, [messages]);
 
   // Auto-generate 命格总览 on mount
-  useEffect(() => {
-    useEffect(() => {
+ useEffect(() => {
   if (autoLoaded.current) return;
 
   autoLoaded.current = true;
