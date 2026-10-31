@@ -207,10 +207,17 @@ export default function InsightPanel({ chart, selectedPalace, selectedSiHua }: I
 
   // Auto-generate 命格总览 on mount
   useEffect(() => {
-    if (autoLoaded.current) return;
-    autoLoaded.current = true;
+    useEffect(() => {
+  if (autoLoaded.current) return;
+
+  autoLoaded.current = true;
+
+  const timer = setTimeout(() => {
     sendMessage(TOPIC_PROMPTS.overview, true);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, 300);
+
+  return () => clearTimeout(timer);
+}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Inject palace analysis when palace selected
   useEffect(() => {
