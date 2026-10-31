@@ -208,12 +208,7 @@ export default function InsightPanel({ chart, selectedPalace, selectedSiHua }: I
     }
   }, [messages]);
 
-  // Auto-generate 命格总览 on mount
-  useEffect(() => {
-    if (autoLoaded.current) return;
-    autoLoaded.current = true;
-    sendMessage(TOPIC_PROMPTS.overview, true);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+ 
 
   // Inject palace analysis when palace selected
   useEffect(() => {
@@ -338,7 +333,12 @@ ${selectedSiHua.starName}化${selectedSiHua.siHua}落在【${palaceName}】，�
     setInput('');
     streamResponse(apiMessages);
   };
-
+  // Auto-generate 命格总览 after sendMessage is ready
+  useEffect(() => {
+    if (autoLoaded.current) return;
+    autoLoaded.current = true;
+    sendMessage(TOPIC_PROMPTS.overview, true);
+  }, []);
   const handleTopicClick = (topicKey: string) => {
     if (loadingRef.current) return;
     setActiveTopic(topicKey);
